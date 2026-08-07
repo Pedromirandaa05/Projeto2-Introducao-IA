@@ -77,3 +77,13 @@ class Tabuleiro:
     def estado(self):
         
         return "".join(self.tabuleiro)
+
+    def vencedor(self):
+
+        if self.verificar_vitoria("X"):
+            return "X"
+
+        if self.verificar_vitoria("O"):
+            return "O"
+
+        return None

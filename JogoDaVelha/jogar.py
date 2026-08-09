@@ -39,9 +39,7 @@ def jogar():
     ambiente = Tabuleiro()
 
     # Carregar agente treinado
-    agente = AgenteQLearning(
-        epsilon=0
-    )
+    agente = AgenteQLearning(epsilon=0)
 
     agente.carregar()
 
@@ -65,7 +63,7 @@ def jogar():
 
     while not ambiente.terminou():
 
-        # IA joga
+        # IA
 
         estado = ambiente.estado()
 
@@ -90,25 +88,25 @@ def jogar():
             print("Empate!")
             return
 
-        # Jogador humano
-
+        # JOGADOR HUMANO
+        
         print("Sua vez.")
-
+        
         jogada = obter_jogada(ambiente)
-
+        
         ambiente.fazer_jogada(jogada, "O")
-
+        
         mostrar_tabuleiro(ambiente)
-
+    
         # Verificar vitória do jogador
         if ambiente.verificar_vitoria("O"):
-
+        
             print("Você venceu!")
             return
-
-        # Verificar empate
+        
+            # Verificar empate
         if ambiente.empate():
-
+        
             print("Empate!")
             return
 

@@ -43,11 +43,9 @@ class Tabuleiro:
             (0,1,2),
             (3,4,5),
             (6,7,8),
-
             (0,3,6),
             (1,4,7),
             (2,5,8),
-
             (0,4,8),
             (2,4,6)
         ]
@@ -85,5 +83,30 @@ class Tabuleiro:
 
         if self.verificar_vitoria("O"):
             return "O"
+
+        return None
+
+    def linha_vencedora(self, jogador):
+
+        combinacoes = [
+            (0, 1, 2),
+            (3, 4, 5),
+            (6, 7, 8),
+            (0, 3, 6),
+            (1, 4, 7),
+            (2, 5, 8),
+            (0, 4, 8),
+            (2, 4, 6)
+        ]
+
+        estado = self.estado()
+
+        for a, b, c in combinacoes:
+            if (
+                estado[a] == jogador and
+                estado[b] == jogador and
+                estado[c] == jogador
+            ):
+                return (a, b, c)
 
         return None

@@ -1,18 +1,26 @@
 from tabuleiro import Tabuleiro
 from agente import AgenteQLearning
-from jogador_aleatorio import JogadorAleatorio
+from jogador_heuristico import JogadorHeuristico
 
+import os
 import csv
 
 # Número de partidas utilizadas no treinamento
 NUM_EPISODIOS = 10000
 
-
 def treinar():
 
     ambiente = Tabuleiro()
     agente = AgenteQLearning()
-    adversario = JogadorAleatorio()
+
+    # Continua treinando a partir da Q-Table existente
+    if os.path.exists("q_table.pkl"):
+        agente.carregar()
+        print("Q-Table carregada. Continuando treinamento...")
+    else:
+        print("Nenhuma Q-Table encontrada. Iniciando treinamento do zero.")
+
+    adversario = JogadorHeuristico()
 
     # Estatísticas gerais
     vitorias = 0
@@ -26,7 +34,15 @@ def treinar():
 
         ambiente.reiniciar()
 
+        ia_comeca = episodio % 2 == 0
+
         resultado = None
+        # Adversário começa metade das partidas
+        if not ia_comeca:
+
+            jogada = adversario.escolher_jogada(ambiente)
+
+            ambiente.fazer_jogada(jogada, "O")
 
         while not ambiente.terminou():
 
@@ -114,6 +130,11 @@ def treinar():
 
             agente.atualizar_q(estado, acao, recompensa, novo_estado, novas_acoes)
 
+        agente.epsilon = max(
+        0.05,
+        agente.epsilon * 0.9998
+    )
+
         # Registrar resultado da partida
 
         resultados.append({
@@ -161,7 +182,7 @@ def treinar():
     # Resultado final
 
     print()
-    print("       TREINAMENTO CONCLUÍDO")
+    print("TREINAMENTO CONCLUÍDO")
 
     print(f"Total de partidas: {NUM_EPISODIOS}")
     print(f"Vitórias: {vitorias}")

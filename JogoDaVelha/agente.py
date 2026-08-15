@@ -3,7 +3,7 @@ import pickle
 
 class AgenteQLearning:
 
-    def __init__(self, alpha=0.1, gamma=0.9, epsilon=0.1):
+    def __init__(self, alpha=0.1, gamma=0.9, epsilon=1.0):
 
         # Taxa de aprendizado
         self.alpha = alpha

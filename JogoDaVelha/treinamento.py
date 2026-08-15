@@ -1,12 +1,13 @@
 from tabuleiro import Tabuleiro
 from agente import AgenteQLearning
+from recompensas import recompensa_intermediaria
 from jogador_heuristico import JogadorHeuristico
 
 import os
 import csv
 
 # Número de partidas utilizadas no treinamento
-NUM_EPISODIOS = 10000
+NUM_EPISODIOS = 50000
 
 def treinar():
 
@@ -120,7 +121,7 @@ def treinar():
 
             # 9. Partida continua
 
-            recompensa = 0
+            recompensa = recompensa_intermediaria(ambiente, acao)
 
             novo_estado = ambiente.estado()
 
@@ -130,10 +131,9 @@ def treinar():
 
             agente.atualizar_q(estado, acao, recompensa, novo_estado, novas_acoes)
 
-        agente.epsilon = max(
-        0.05,
-        agente.epsilon * 0.9998
-    )
+            agente.epsilon = max(
+            0.05,
+            agente.epsilon * 0.9998)
 
         # Registrar resultado da partida
 

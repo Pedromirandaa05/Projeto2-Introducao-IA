@@ -1,6 +1,6 @@
 from tabuleiro import Tabuleiro
 from agente import AgenteQLearning
-from jogador_aleatorio import JogadorAleatorio
+from jogador_heuristico import JogadorHeuristico
 
 NUM_PARTIDAS = 10000
 
@@ -12,7 +12,7 @@ def avaliar():
 
     agente.carregar()
 
-    adversario = JogadorAleatorio()
+    adversario = JogadorHeuristico()
 
     vitorias = 0
     derrotas = 0

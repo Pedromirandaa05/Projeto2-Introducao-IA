@@ -1,13 +1,10 @@
 import pickle
 
-
 with open("q_table.pkl", "rb") as arquivo:
     q_table = pickle.load(arquivo)
 
-
 print("Quantidade de estados aprendidos:", len(q_table))
 print()
-
 
 for estado, acoes in q_table.items():
 

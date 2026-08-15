@@ -4,7 +4,6 @@ from tkinter import messagebox
 from tabuleiro import Tabuleiro
 from agente import AgenteQLearning
 
-
 COR_X = "#1976D2"
 COR_O = "#D32F2F"
 
@@ -13,7 +12,6 @@ COR_VITORIA = "#8BC34A"
 COR_FUNDO = "#ECEFF1"
 
 COR_BOTAO = "white"
-
 
 class Interface:
 
@@ -196,7 +194,6 @@ class Interface:
         self.atualizar()
 
         self.status["text"] = "Sua vez"
-
 
     def reiniciar_ia(self):
 

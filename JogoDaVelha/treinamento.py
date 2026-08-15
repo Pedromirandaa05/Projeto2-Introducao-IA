@@ -2,7 +2,9 @@ from tabuleiro import Tabuleiro
 from agente import AgenteQLearning
 from recompensas import recompensa_intermediaria
 from jogador_heuristico import JogadorHeuristico
+from jogador_aleatorio import JogadorAleatorio
 
+import random
 import os
 import csv
 
@@ -21,7 +23,8 @@ def treinar():
     else:
         print("Nenhuma Q-Table encontrada. Iniciando treinamento do zero.")
 
-    adversario = JogadorHeuristico()
+    adversario_heuristico = JogadorHeuristico()
+    adversario_aleatorio = JogadorAleatorio()
 
     # Estatísticas gerais
     vitorias = 0
@@ -34,6 +37,12 @@ def treinar():
     for episodio in range(NUM_EPISODIOS):
 
         ambiente.reiniciar()
+
+        # Escolhe o adversário da partida
+        if random.random() < 0.5:
+            adversario = adversario_heuristico
+        else:
+            adversario = adversario_aleatorio
 
         ia_comeca = episodio % 2 == 0
 

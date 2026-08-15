@@ -168,13 +168,32 @@ class Interface:
 
         self.status["text"]="Sua vez"
 
+    def escolher_primeiro_jogador(self):
+
+        resposta = messagebox.askyesno(
+            "Nova partida",
+            "Deseja começar a partida?\n\n"
+            "Sim = Você começa\n"
+            "Não = IA começa"
+        )
+
+        if resposta:
+
+            self.status["text"] = "Sua vez"
+
+        else:
+
+            self.status["text"] = "IA pensando..."
+
+            self.janela.after(350, self.jogada_ia)
+
     def reiniciar(self):
 
         self.tabuleiro.reiniciar()
 
         self.atualizar()
 
-        self.status["text"]="Sua vez"
+        self.escolher_primeiro_jogador()
 
 if __name__=="__main__":
     Interface()

@@ -55,6 +55,8 @@ class Interface:
 
         tk.Button(self.janela, text="Nova partida", font=("Arial",12),command=self.reiniciar).grid(row=4, column=0, columnspan=3, pady=15)
 
+        tk.Button(self.janela, text="Nova (IA começa)", font=("Arial", 12),command=self.reiniciar_ia).grid(row=4, column=1, columnspan=2, pady=15, padx=5)
+
         self.reiniciar()
 
         self.janela.mainloop()
@@ -187,13 +189,27 @@ class Interface:
 
             self.janela.after(350, self.jogada_ia)
 
-    def reiniciar(self):
+    def reiniciar_humano(self):
 
         self.tabuleiro.reiniciar()
 
         self.atualizar()
 
-        self.escolher_primeiro_jogador()
+        self.status["text"] = "Sua vez"
+
+
+    def reiniciar_ia(self):
+
+        self.tabuleiro.reiniciar()
+
+        self.atualizar()
+
+        self.status["text"] = "IA pensando..."
+
+        self.janela.after(350, self.jogada_ia)
+
+    def reiniciar(self):
+        self.reiniciar_humano()
 
 if __name__=="__main__":
     Interface()

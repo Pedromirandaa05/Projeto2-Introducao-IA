@@ -31,8 +31,6 @@ class AgenteQLearning:
         if random.uniform(0, 1) < self.epsilon:
             return random.choice(acoes_disponiveis)
 
-        # Exploitação
-
         melhor_valor = float("-inf")
         melhores_acoes = []
 
